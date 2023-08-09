@@ -4,3 +4,9 @@
 </script>
 
 <Router {routes} />
+
+<style>
+  :root{
+    
+  }
+</style>
