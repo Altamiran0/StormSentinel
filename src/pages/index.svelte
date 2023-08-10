@@ -1,16 +1,14 @@
 <script>
-    import { metatags } from '@roxi/routify'
-    
-    metatags.title = 'My Routify app'
-    metatags.description = 'Description coming soon...'
+  import { metatags } from '@roxi/routify'
+
+  metatags.title = 'Storm sentinel'
+  metatags.description = 'A weather web app with svelte'
 </script>
 
-<h1>Routify Starter Template</h1>
+<!-- En vista de que no era necesario utilizar routify, ya que la pagina solo tendria una vista me lamente, pero luego se me ocurrio
+  que la pagina tenga el index o ruta "/" en la cual se solicite la ciudad o pais y te mande como var de forma automatica 
+  para la llamada a la api. la ruta "/" sera un screensplash o pagina de carga. y entre paginas habra una transicion (posiblemente de opacidad) -->
 
-<p>
-    To see an example app that shows off a lot of Routify's features, go to <a href="/example">/example</a>
-</p>
+<!-- icono • -->
 
-<p>
-    This template is ready to be used in production! just delete the example app at: src/pages/example
-</p>
+
