@@ -1,4 +1,5 @@
 import "./global.css";
+import "./glovalVariables.css";
 import HMR from "@roxi/routify/hmr";
 import App from "./App.svelte";
 

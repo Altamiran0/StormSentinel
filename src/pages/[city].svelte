@@ -1,5 +1,4 @@
 <script>
-  import WeatherData from './_components/WeatherData.svelte'
   import { metatags } from '@roxi/routify'
 
   // Metatags ---------------
@@ -10,48 +9,53 @@
   // Components -------------
 
   import LoadingScreen from './_components/LoadingScreen.svelte'
-
   import FloatMenu from './_components/FloatMenu.svelte'
   import MenuButton from './_components/MapButton.svelte'
+
   import WeatherInfo_Tab from './_components/WeatherInfo_tab.svelte'
+  import WeatherData from './_components/WeatherData.svelte'
 
   // Stores -----------------
 
-  import { crdPackage } from './_js/_stores/crdPackage'
+  import { coordinateCities } from './_js/_stores/locationsData'
   import menuState from './_js/_stores/menuState'
 
   // Variables --------------
 
+  export let city
   const five_minutes = 1000 * 60 * 5 // 5ms
 
   // Functions --------------
+
   import getWeatherData from './_js/getWeatherData'
 
-  $: promise = getWeatherData($crdPackage.lat, $crdPackage.lon)
+  $: promise = getWeatherData($coordinateCities[city].lat, $coordinateCities[city].lon)
 
   setInterval(() => {
-    promise = getWeatherData($crdPackage.lat, $crdPackage.lon)
+    promise = getWeatherData($coordinateCities[city].lat, $coordinateCities[city].lon)
   }, five_minutes)
 </script>
 
-{#if $menuState}
-<FloatMenu />
-{/if}
+{#key city}
+  {#if $menuState}
+    <FloatMenu />
+  {/if}
 
-{#await promise}
-  <LoadingScreen />
-{:then weatherData}
-  <aside class="glass" on:pointerenter={() => menuState.set(true)}>
-    <MenuButton alt="choose an location" />
-  </aside>
-  <main>
-    <WeatherData {weatherData}/>
-    <WeatherInfo_Tab {weatherData} />
-  </main>
-{:catch err}
-  <strong>Por favor, recargue la pagina</strong>
-  <strong>{err}</strong>
-{/await} 
+  {#await promise}
+    <LoadingScreen />
+  {:then weatherData}
+    <aside class="glass" on:pointerenter={() => menuState.set(true)}>
+      <MenuButton alt="choose an location" />
+    </aside>
+    <main>
+      <WeatherData {weatherData} />
+      <WeatherInfo_Tab {weatherData} />
+    </main>
+  {:catch err}
+    <strong>Por favor, recargue la pagina</strong>
+    <strong>{err}</strong>
+  {/await}
+{/key}
 
 <style>
   aside {
@@ -79,7 +83,7 @@
   }
 
   @media (max-width: 754px) {
-    aside{
+    aside {
       background: var(--colorBackground);
     }
     main {
