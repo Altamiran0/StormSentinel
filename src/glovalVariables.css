@@ -1,0 +1,30 @@
+@font-face {
+    font-family: Jost;
+    src: url('./pages/_assets/fonts/Jost-VariableFont_wght.ttf');
+}
+
+* {
+    margin: 0;
+}
+
+:root {
+    --colorBackground: #1082c4;
+    --mainColor: #e6e6e6;
+    --mainFontFamily: Jost;
+
+    --borderConfig: 3px solid rgba(230, 230, 230, 0.75);
+    --borderRadius: 0px 0px 150px 0px;
+}
+
+.text {
+    color: var(--mainColor);
+    font-family: var(--mainFontFamily);
+    mix-blend-mode: screen;
+
+    letter-spacing: 2px;
+}
+
+.glass{
+    background: linear-gradient(135deg, rgba(183, 183, 183, 0.26) 0%, rgba(103, 103, 103, 0.07) 100%);
+    backdrop-filter: blur(10px);
+}
